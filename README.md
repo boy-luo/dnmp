@@ -164,6 +164,11 @@ MySQL连接信息：
 - username：（手动在phpmyadmin界面输入）
 - password：（手动在phpmyadmin界面输入）
 
+项目连接数据库成功了,注意项目中数据库主机用 host=mysql 
+Navicat中连接主机不受影响,localhost, 172.0.0.1,mysql都可以连接
+$pdo = new PDO('mysql:host=mysql;dbname=site1', 'root', '123456');。
+或者使用 $connect = mysqli_connect('mysql','root','123456','wordpress','3306');
+
 ### 7.2 phpRedisAdmin
 phpRedisAdmin容器映射到主机的端口地址是：`8081`，所以主机上访问phpMyAdmin的地址是：
 ```
