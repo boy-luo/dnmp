@@ -41,7 +41,8 @@ services:
     networks:
       - net-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: "123456"
+#    // todo: change pass word
+      MYSQL_ROOT_PASSWORD: "worldpress123456+-."
 
   redis:
     image: redis:4.0
