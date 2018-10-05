@@ -1,4 +1,5 @@
-version: "3"
+# 注意 这里clone的配置文件中是3 我的执行失败 我改成2就可以了 ,1也不行 各自根据情况进行修改
+version: "2"
 services:
   nginx:
     image: nginx:alpine
@@ -6,10 +7,10 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-#      - ./www/:/var/www/html/:rw
-#linux server www
-      - /phpstudy/www/:/var/www/html/:rw
+#      修改此处 ./www/为自己的项目路径, 如果没有可以自定义 ,这里使用的是相对路径 就是git clone下来的目录中的www目录
+      - ./www/:/var/www/html/:rw
       - ./conf/conf.d:/etc/nginx/conf.d/:ro
+#  这里就是站点域名的配置文件 在相对路径 conf/conf.d/ 下面(注意 linux是反斜杠)  clone下来的配置目录中的www目录下已经有了site1 和2 的目录,所以访问没问题, 但是如果换成自己的项目目录, 就需要自己新建site1目录(因为site1配置文件中把localhost配置到了site1目录下了)或者自己修改site1里面的配置,把localhost指向到自己的项目目录,
       - ./conf/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./log/:/var/log/dnmp/:rw
     networks:
@@ -20,10 +21,10 @@ services:
     expose:
       - "9000"
     volumes:
-#      - ./www/:/var/www/html/:rw
-#linux server www
-      - /phpstudy/www/:/var/www/html/:rw
+#      修改此处 ./www/为自己的项目路径, 如果没有可以自定义 ,这里使用的是相对路径 就是git clone下来的目录中的www目录
+      - ./www/:/var/www/html/:rw
       - ./conf/php.ini:/usr/local/etc/php/php.ini:ro
+#  这里就是站点域名的配置文件 在相对路径 conf/conf.d/ 下面(注意 linux是反斜杠)  clone下来的配置目录中的www目录下已经有了site1 和2 的目录,所以访问没问题, 但是如果换成自己的项目目录, 就需要自己新建site1目录(因为site1配置文件中把localhost配置到了site1目录下了)或者自己修改site1里面的配置,把localhost指向到自己的项目目录,
       - ./conf/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf:rw
       - ./log/:/var/log/dnmp/:rw
     networks:
@@ -41,8 +42,8 @@ services:
     networks:
       - net-mysql
     environment:
-#    // todo: change pass word
-      MYSQL_ROOT_PASSWORD: "worldpress123456+-."
+#    // todo: 修改为自己的密码,此密码github中公开的
+      MYSQL_ROOT_PASSWORD: "mima123456"
 
   redis:
     image: redis:4.0
