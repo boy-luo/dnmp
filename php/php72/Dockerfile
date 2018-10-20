@@ -59,10 +59,12 @@ RUN apt-get update \
     #&& apt-get install -y libmcrypt-dev \
     #&& docker-php-ext-install mcrypt \
     #&& :\
-    #&& apt-get install -y curl \
-    #&& apt-get install -y libcurl3 \
-    #&& apt-get install -y libcurl4-openssl-dev \
-    #&& docker-php-ext-install curl \
+
+    # todo 18-10-20开启没有重启docker 没生效
+    && apt-get install -y curl \
+    && apt-get install -y libcurl3 \
+    && apt-get install -y libcurl4-openssl-dev \
+    && docker-php-ext-install curl \
     #&& :\
     #&& apt-get install -y libreadline-dev \
     #&& docker-php-ext-install readline \
